@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Достигаторы — система успеха</title>
+<meta name="description" content="Карьера, спорт и здоровье: практическая система для молодых мужчин и женщин, нацеленных на результат.">
+<style>
+:root{
+  --navy:#0b1f3a; --navy2:#13305a; --blue:#1f5fbf; --accent:#16b6a6; --gold:#e0a82e;
+  --bg:#f4f7fb; --card:#fff; --text:#1b2a41; --muted:#5b6b82; --line:#dde5f0;
+  --radius:16px; --shadow:0 6px 24px rgba(11,31,58,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;-webkit-text-size-adjust:100%}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+h1,h2,h3{line-height:1.2;color:var(--navy)}
+/* nav */
+header{position:sticky;top:0;z-index:50;background:rgba(11,31,58,.97);backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{color:#fff;font-weight:800;letter-spacing:.5px;font-size:18px;text-decoration:none;white-space:nowrap}
+.logo span{color:var(--accent)}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{color:#c9d6ea;text-decoration:none;font-size:14px;padding:8px 12px;border-radius:8px;white-space:nowrap}
+nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+/* hero */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#1b4b8f 100%);color:#fff;padding:72px 0 80px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(22,182,166,.35),transparent 70%)}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:999px;font-size:13px;margin-bottom:20px}
+.hero h1{color:#fff;font-size:clamp(32px,6vw,56px);max-width:760px;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{max-width:620px;color:#c9d6ea;font-size:18px;margin-bottom:30px}
+.btn{display:inline-block;background:var(--accent);color:#04201d;font-weight:700;padding:14px 26px;border-radius:12px;text-decoration:none;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(22,182,166,.4)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);margin-left:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;max-width:640px;position:relative;z-index:1}
+.stat b{display:block;font-size:30px;color:var(--gold)}
+.stat span{font-size:13px;color:#c9d6ea}
+/* sections */
+section{padding:72px 0}
+section:nth-of-type(even){background:#fff}
+.eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.sec-title{font-size:clamp(26px,4vw,38px);margin-bottom:12px}
+.sec-lead{color:var(--muted);max-width:700px;margin-bottom:36px}
+.grid{display:grid;gap:18px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.card h3{font-size:19px;margin-bottom:10px}
+.card p,.card li{color:var(--muted);font-size:15px}
+.card ul{padding-left:18px}
+.card li{margin:5px 0}
+.ico{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.callout{margin-top:28px;background:var(--navy);color:#e6eefb;border-radius:var(--radius);padding:24px 26px;border-left:5px solid var(--gold)}
+.callout b{color:var(--gold)}
+/* tabs */
+.tabs{display:inline-flex;background:#e6edf7;border-radius:12px;padding:4px;margin-bottom:24px}
+.tab{border:0;background:transparent;padding:10px 22px;border-radius:9px;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit}
+.tab.on{background:var(--navy);color:#fff}
+.pane{display:none}.pane.on{display:block}
+h3.sub{margin:34px 0 14px;font-size:22px}
+/* macros */
+.macros{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.macro{background:var(--navy);color:#fff;border-radius:14px;padding:16px;text-align:center}
+.macro b{display:block;font-size:26px}
+.macro span{font-size:12px;color:#aebfd9;text-transform:uppercase;letter-spacing:.8px}
+.macro.k b{color:var(--gold)}
+.table-scroll{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line);background:#fff}
+table{width:100%;border-collapse:collapse;min-width:560px;font-size:14.5px}
+th{background:#eaf0f9;color:var(--navy);text-align:left;padding:12px 14px;font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--text)}
+td small{color:var(--muted)}
+tr.total td{background:#f1f6fc;font-weight:700}
+.num{white-space:nowrap;text-align:right}
+/* training */
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.day{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.day header{position:static;background:var(--navy2);color:#fff;padding:12px 18px;font-weight:700;display:flex;justify-content:space-between;backdrop-filter:none}
+.day header span{color:var(--accent);font-weight:600;font-size:13px}
+.day ol{padding:14px 18px 16px 36px;font-size:14.5px}
+.day li{margin:6px 0}
+.day li small{color:var(--muted)}
+.day.rest header{background:#5b6b82}
+.day p{padding:14px 18px;font-size:14.5px;color:var(--muted)}
+/* calculator */
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px;font-weight:600}
+input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:16px;font-family:inherit;background:#fff;color:var(--text)}
+.calc button{padding:13px;border:0;border-radius:10px;background:var(--navy);color:#fff;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit}
+#calcOut{margin-top:16px;font-size:15px;color:var(--text)}
+#calcOut b{color:var(--blue)}
+/* health */
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:#e1f6f3;color:#0b7d71;margin-left:6px;vertical-align:middle}
+.pill.w{background:#fdecc8;color:#8a6208}
+.pill.r{background:#fde0e0;color:#9a2b2b}
+.warn{margin-top:28px;background:#fff7e6;border:1px solid #f0d594;color:#6e5410;border-radius:var(--radius);padding:18px 22px;font-size:14.5px}
+/* habits */
+.principles{counter-reset:p;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.principles div{counter-increment:p;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.principles div::before{content:"0" counter(p);display:block;color:var(--accent);font-weight:800;font-size:28px;margin-bottom:6px}
+.principles h3{font-size:17px;margin-bottom:6px}
+.principles p{font-size:14.5px;color:var(--muted)}
+nav a.on{background:var(--accent);color:#04201d;font-weight:700}
+.btn:active,.calc button:active,.tab:active,nav a:active,#toTop:active{transform:scale(.96)}
+.tab:hover:not(.on){background:#d5e0f0;color:var(--navy)}
+.calc button:hover{background:var(--blue)}
+.btn,.calc button,.tab,nav a,#toTop{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+#toTop{position:fixed;right:16px;bottom:16px;width:48px;height:48px;border-radius:50%;border:0;background:var(--accent);color:#04201d;font-size:22px;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:.25s;z-index:60}
+#toTop.show{opacity:1;pointer-events:auto}
+.src{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);background:#e6eefb;padding:3px 9px;border-radius:999px;margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{background:#fff;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.step:nth-child(2){border-top-color:var(--blue)}.step:nth-child(3){border-top-color:var(--gold)}
+.step b{display:block;color:var(--navy);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.step h3{font-size:19px;margin-bottom:8px}
+.step ul{padding-left:18px;font-size:14.5px;color:var(--muted)}.step li{margin:5px 0}
+.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 20px;margin:14px 0}
+.checks label{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--text);font-weight:400;cursor:pointer;padding:8px 10px;border-radius:10px}
+.checks label:hover{background:#eef3fa}
+.checks input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--accent)}
+.bar{height:12px;background:#e6edf7;border-radius:999px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .4s}
+#careerOut{font-size:15px;margin-top:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:#fff;color:var(--navy);padding:10px 18px;border-radius:999px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:.2s;-webkit-tap-highlight-color:transparent}
+.chip:hover{border-color:var(--accent)}
+.chip:active{transform:scale(.96)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#04201d}
+.gpane{display:none}.gpane.on{display:block}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.mini .card{padding:18px}
+.mini .big{font-size:24px;font-weight:800;color:var(--navy);display:block;margin:2px 0}
+.mini small{color:var(--muted)}
+footer{background:var(--navy);color:#9fb2d0;padding:36px 0;font-size:14px;text-align:center}
+footer b{color:#fff}
+@media(max-width:860px){
+  .g3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  section{padding:48px 0}
+  .hero{padding:48px 0 56px}
+  .hero p{font-size:16px}
+  .g3,.g2,.steps,.checks{grid-template-columns:1fr}
+  .chips{flex-wrap:nowrap;overflow-x:auto;margin-right:-16px;padding-right:16px;scrollbar-width:none}
+  .chip{white-space:nowrap}
+  .macros{grid-template-columns:1fr 1fr}
+  .btn.ghost{margin:10px 0 0}
+  .stat b{font-size:24px}
+  .tabs{display:flex}.tab{flex:1;padding:10px 8px}
+  .logo{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">ДОСТИГАТОРЫ<span>.</span></a>
+    <nav>
+      <a href="#career">Карьера</a>
+      <a href="#sport">Спорт</a>
+      <a href="#health">Здоровье</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <span class="tag">Для молодых мужчин и женщин · 18–35 лет</span>
+    <h1>Успех — это <em>система</em>, а не удача</h1>
+    <p>Профессия, тело и здоровье работают как единый механизм. Прокачивайте все три сферы одновременно — и результат придёт во всех направлениях жизни.</p>
+    <a class="btn" href="#career">Начать</a><a class="btn ghost" href="#sport">Сразу к питанию и тренировкам</a>
+    <div class="stats">
+      <div class="stat"><b>3</b><span>ключевые сферы</span></div>
+      <div class="stat"><b>7</b><span>дней — готовый план</span></div>
+      <div class="stat"><b>1%</b><span>прогресса в день</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ КАРЬЕРА ============ -->
+<section id="career">
+  <div class="wrap">
+    <div class="eyebrow">Блок 1</div>
+    <h2 class="sec-title">Карьера: как стать лучшим специалистом</h2>
+    <p class="sec-lead">Лучших специалистов отличает не талант, а три привычки: они постоянно учатся, доводят задачи до результата в срок и сами берут ответственность.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="ico">📚</div>
+        <h3>Постоянное обучение</h3>
+        <ul>
+          <li>Закладывайте 5–7 часов в неделю: по 45–60 минут в день.</li>
+          <li>Правило 70/20/10: 70% — практика на реальных задачах, 20% — наставники и коллеги, 10% — курсы и книги.</li>
+          <li>Одна книга по профессии в месяц, один сертификат или курс в квартал.</li>
+          <li>Ведите «журнал навыков»: что освоено, что применено, что дальше.</li>
+          <li>Изучайте смежные области — T-образный профиль ценится выше узкого.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="ico">✅</div>
+        <h3>Закрывать задачи вовремя</h3>
+        <ul>
+          <li>Каждый вечер — план на завтра: максимум 3 приоритетные задачи.</li>
+          <li>Матрица Эйзенхауэра: срочное/важное. Растёт тот, кто делает важное до того, как оно стало срочным.</li>
+          <li>Блоки глубокой работы по 90 минут без уведомлений.</li>
+          <li>Закладывайте +20% времени на оценку сроков. Если срыв неизбежен — предупреждайте заранее, а не в дедлайн.</li>
+          <li>Задача закрыта, когда результат принят, а не когда «почти готово».</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="ico">🚀</div>
+        <h3>Инициативность</h3>
+        <ul>
+          <li>Не приносите проблему без решения: «вижу X, предлагаю A или B».</li>
+          <li>Берите задачи на уровень выше своей должности — так вырастают в грейде.</li>
+          <li>Находите узкие места процесса и предлагайте улучшения с цифрами.</li>
+          <li>Просите обратную связь раз в месяц и действуйте по ней.</li>
+          <li>Говорите о результатах: фиксируйте достижения в цифрах для оценки и повышения.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">Ещё 6 качеств, которые делают вас незаменимым</h3>
+    <div class="principles">
+      <div><h3>Надёжность</h3><p>Сказал — сделал. Репутация строится годами и разрушается одним невыполненным обещанием.</p></div>
+      <div><h3>Коммуникация</h3><p>Чёткие письма, короткие отчёты, умение слушать. Навык письма и презентации — множитель любой профессии.</p></div>
+      <div><h3>Финансовая грамотность</h3><p>Подушка на 3–6 месяцев, правило 50/30/20, инвестиции в себя и долгосрочные активы.</p></div>
+      <div><h3>Нетворкинг</h3><p>Раз в месяц — новая профессиональная встреча. Помогайте первыми, не ждите выгоды сразу.</p></div>
+      <div><h3>Английский язык</h3><p>Уровень B2+ открывает международные задачи, документацию и доходы в 1,5–2 раза выше.</p></div>
+      <div><h3>Сон и энергия</h3><p>Сон 7–9 часов и режим дня дают больше продуктивности, чем любые приложения для тайм-менеджмента.</p></div>
+    </div>
+
+    <h3 class="sub">Мировые практики профессионального роста</h3>
+    <p class="sec-lead" style="margin-bottom:20px">Девять проверенных методик, которые используют лучшие специалисты и компании мира. Выберите 2–3 и внедряйте по одной в месяц.</p>
+    <div class="grid g3">
+      <div class="card"><span class="src">А. Эрикссон</span><h3>Осознанная практика</h3><p>Мастерство даёт не количество часов, а качество: чёткая цель каждой сессии, задачи чуть сложнее вашего уровня, мгновенная обратная связь и разбор ошибок. 1–2 часа в день в пик концентрации.</p></div>
+      <div class="card"><span class="src">К. Ньюпорт</span><h3>Глубокая работа (Deep Work)</h3><p>Редкий и ценный навык — работать без отвлечений над сложным. Фиксируйте 2–4 часа в день, отключайте уведомления, заранее определяйте, что именно сделаете в этом блоке.</p></div>
+      <div class="card"><span class="src">Intel · Google</span><h3>Цели по системе OKR</h3><p>1–3 амбициозные цели на квартал (Objective) и 3–4 измеримых ключевых результата (Key Results). Оценка по шкале 0–1: 0,6–0,7 по амбициозной цели считается хорошим результатом.</p></div>
+      <div class="card"><span class="src">Д. Аллен</span><h3>Getting Things Done</h3><p>Выгружайте всё из головы в одну систему: собрать → уточнить → разложить → выполнить → пересмотреть. Правило двух минут: если дело занимает меньше двух минут, делайте сразу. Раз в неделю — обзор.</p></div>
+      <div class="card"><span class="src">Дж. Клир</span><h3>Атомные привычки</h3><p>Растите на 1% в день. Привязывайте новую привычку к существующей («после кофе — 30 минут обучения»), начинайте с двух минут и отслеживайте серию дней без пропусков.</p></div>
+      <div class="card"><span class="src">К. Дуэк</span><h3>Установка на рост</h3><p>Способности развиваются. Заменяйте «я не умею» на «я пока не умею», воспринимайте ошибки и критику как данные для улучшения, а не оценку вашей личности.</p></div>
+      <div class="card"><span class="src">Toyota · Кайдзен</span><h3>Цикл PDCA</h3><p>План → Действие → Проверка → Улучшение. Небольшие ежедневные улучшения процессов дают накопительный эффект. После каждого проекта задавайте три вопроса: что сработало, что нет, что изменим.</p></div>
+      <div class="card"><span class="src">Р. Фейнман</span><h3>Обучение через объяснение</h3><p>Выучили тему — объясните её простыми словами человеку без подготовки. Пробелы в объяснении показывают, что изучить дальше. Повторяйте по интервалам: через 1, 3, 7 и 30 дней.</p></div>
+      <div class="card"><span class="src">Менторство</span><h3>Ментор и спонсор</h3><p>Ментор учит и советует, спонсор продвигает вас на новые роли. Проводите регулярные встречи 1:1 с руководителем, просите откровенную обратную связь и выбирайте наставника на 1–2 уровня выше.</p></div>
+    </div>
+
+    <h3 class="sub">План роста на 90 дней</h3>
+    <div class="steps">
+      <div class="step"><b>Дни 1–30</b><h3>Диагностика</h3><ul>
+        <li>Оцените навыки по шкале 1–5 и выберите один ключевой навык на квартал.</li>
+        <li>Сформулируйте 1–3 цели по OKR.</li>
+        <li>Найдите ментора и договоритесь о встрече раз в 2 недели.</li>
+        <li>Соберите отзывы от руководителя и 3 коллег.</li></ul></div>
+      <div class="step"><b>Дни 31–60</b><h3>Практика</h3><ul>
+        <li>Ежедневно 60 минут осознанной практики ключевого навыка.</li>
+        <li>Возьмите проект сложнее текущего уровня.</li>
+        <li>Недельный обзор каждую пятницу.</li>
+        <li>Один раз в неделю поделитесь знанием с командой.</li></ul></div>
+      <div class="step"><b>Дни 61–90</b><h3>Результат и видимость</h3><ul>
+        <li>Зафиксируйте достижения в цифрах (экономия времени, рост показателей, сроки).</li>
+        <li>Проведите разговор с руководителем о росте: роль, зарплата, задачи.</li>
+        <li>Обновите резюме и профиль в LinkedIn.</li>
+        <li>Поставьте цели на следующий квартал.</li></ul></div>
+    </div>
+
+    <h3 class="sub">Недельный ритм профессионала</h3>
+    <div class="table-scroll"><table>
+      <tr><th>Когда</th><th>Что делать</th><th class="num">Время</th></tr>
+      <tr><td><b>Каждое утро</b></td><td>Блок глубокой работы над приоритетной задачей, телефон в режиме «не беспокоить»</td><td class="num">90–120 мин</td></tr>
+      <tr><td><b>Каждый день</b></td><td>Обучение: курс, книга, практика, подкаст по профессии</td><td class="num">45–60 мин</td></tr>
+      <tr><td><b>Каждый вечер</b></td><td>Итоги дня: что сделано, что перенесено, 3 главные задачи на завтра</td><td class="num">10 мин</td></tr>
+      <tr><td><b>Понедельник</b></td><td>Планирование недели по OKR, определение трёх главных результатов недели</td><td class="num">30 мин</td></tr>
+      <tr><td><b>Пятница</b></td><td>Обзор недели: результаты, уроки, обратная связь, обновление списка достижений</td><td class="num">30 мин</td></tr>
+      <tr><td><b>Раз в 2 недели</b></td><td>Встреча с ментором или руководителем 1:1</td><td class="num">30–45 мин</td></tr>
+      <tr><td><b>Раз в месяц</b></td><td>Нетворкинг: профессиональное событие, новый контакт, помощь коллеге</td><td class="num">2–3 часа</td></tr>
+      <tr><td><b>Раз в квартал</b></td><td>Пересмотр целей, оценка навыков, рыночная стоимость и зарплата</td><td class="num">2 часа</td></tr>
+    </table></div>
+
+    <h3 class="sub">Набор навыков, который ценится на рынке</h3>
+    <div class="grid g2">
+      <div class="card"><h3>Профессиональные (hard skills)</h3><ul>
+        <li>Грамотная работа с ИИ-инструментами: формулировка задач, проверка результата, автоматизация рутины</li>
+        <li>Анализ данных: Excel/Google Sheets, основы SQL и визуализации</li>
+        <li>Управление проектами и сроками (Agile, Kanban)</li>
+        <li>Английский язык уровня B2 и выше</li>
+        <li>Глубокая экспертиза в своей профессии</li></ul></div>
+      <div class="card"><h3>Универсальные (soft skills)</h3><ul>
+        <li>Аналитическое и критическое мышление</li>
+        <li>Адаптивность и стрессоустойчивость</li>
+        <li>Любознательность и самообучение</li>
+        <li>Коммуникация, переговоры, умение выступать публично</li>
+        <li>Лидерство и умение работать в команде</li></ul>
+        <p style="margin-top:8px;font-size:13px">Эти навыки регулярно входят в списки самых востребованных в отчётах Всемирного экономического форума о будущем рабочих мест.</p></div>
+    </div>
+
+    <h3 class="sub">Самооценка: ваш уровень сейчас</h3>
+    <div class="card">
+      <p>Отметьте всё, что делаете регулярно (не реже раза в неделю):</p>
+      <div class="checks" id="careerChecks">
+        <label><input type="checkbox">Учусь по профессии не меньше 5 часов в неделю</label>
+        <label><input type="checkbox">Планирую день и ставлю не больше 3 приоритетов</label>
+        <label><input type="checkbox">Закрываю задачи в срок или предупреждаю заранее</label>
+        <label><input type="checkbox">Предлагаю улучшения, а не только сообщаю о проблемах</label>
+        <label><input type="checkbox">Работаю блоками глубокой концентрации</label>
+        <label><input type="checkbox">Провожу недельный обзор результатов</label>
+        <label><input type="checkbox">Регулярно прошу и получаю обратную связь</label>
+        <label><input type="checkbox">Есть ментор или наставник</label>
+        <label><input type="checkbox">Фиксирую свои достижения в цифрах</label>
+        <label><input type="checkbox">Расширяю профессиональные контакты</label>
+      </div>
+      <div class="bar"><i id="careerBar"></i></div>
+      <div id="careerOut"></div>
+    </div>
+
+    <div class="callout"><b>Формула роста:</b> компетенции × надёжность × видимость результата. Если один множитель равен нулю — рост остановится. Раз в квартал проверяйте каждый из трёх.</div>
+  </div>
+</section>
+
+<!-- ============ СПОРТ ============ -->
+<section id="sport">
+  <div class="wrap">
+    <div class="eyebrow">Блок 2</div>
+    <h2 class="sec-title">Спорт и питание: тело как инструмент</h2>
+    <p class="sec-lead">Выберите профиль — получите готовый рацион на день с КБЖУ и недельную программу тренировок. Значения ориентировочные: для мужчины ≈ 80 кг, для женщины ≈ 62 кг, умеренная активность, цель — поддержание формы и рост силы.</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-t="m">Мужчины</button>
+      <button class="tab" data-t="f">Женщины</button>
+    </div>
+
+    <!-- МУЖЧИНЫ -->
+    <div class="pane on" id="pane-m">
+      <h3 class="sub" style="margin-top:0">Рацион на день · мужчина</h3>
+      <div class="macros">
+        <div class="macro k"><b>≈2545</b><span>ккал</span></div>
+        <div class="macro"><b>175 г</b><span>белки</span></div>
+        <div class="macro"><b>76 г</b><span>жиры</span></div>
+        <div class="macro"><b>290 г</b><span>углеводы</span></div>
+      </div>
+      <div class="table-scroll"><table>
+        <tr><th>Приём</th><th>Состав</th><th class="num">Ккал</th><th class="num">Б / Ж / У</th></tr>
+        <tr><td><b>Завтрак</b><br><small>7:30</small></td><td>Овсянка 80 г (сухая), 3 яйца, банан</td><td class="num">615</td><td class="num">30 / 20 / 81</td></tr>
+        <tr><td><b>Перекус 1</b><br><small>10:30</small></td><td>Творог 5% 200 г, ягоды 100 г, грецкие орехи 15 г</td><td class="num">385</td><td class="num">37 / 21 / 16</td></tr>
+        <tr><td><b>Обед</b><br><small>13:30</small></td><td>Куриная грудка 150 г, рис варёный 250 г, овощной салат 200 г с 1 ст. л. оливкового масла</td><td class="num">638</td><td class="num">44 / 15 / 78</td></tr>
+        <tr><td><b>Перекус 2</b><br><small>перед тренировкой</small></td><td>Цельнозерновой хлеб 2 ломтика, арахисовая паста 15 г, банан</td><td class="num">365</td><td class="num">12 / 10 / 60</td></tr>
+        <tr><td><b>Ужин</b><br><small>20:00</small></td><td>Филе индейки 180 г, гречка варёная 200 г, овощи 200 г с 5 г масла</td><td class="num">542</td><td class="num">52 / 10 / 55</td></tr>
+        <tr class="total"><td colspan="2">Итого за день</td><td class="num">≈2545</td><td class="num">175 / 76 / 290</td></tr>
+      </table></div>
+
+      <h3 class="sub">Программа тренировок · 5 дней в неделю</h3>
+      <div class="days">
+        <div class="day"><header>Пн <span>Грудь · плечи · трицепс</span></header><ol>
+          <li>Жим штанги лёжа <small>4×6–8</small></li>
+          <li>Жим гантелей на наклонной <small>3×8–10</small></li>
+          <li>Жим стоя (плечи) <small>3×8</small></li>
+          <li>Махи гантелей в стороны <small>3×12–15</small></li>
+          <li>Французский жим / трицепс на блоке <small>3×10–12</small></li></ol></div>
+        <div class="day"><header>Вт <span>Спина · бицепс</span></header><ol>
+          <li>Подтягивания <small>4×макс</small></li>
+          <li>Тяга штанги в наклоне <small>4×8</small></li>
+          <li>Тяга верхнего блока <small>3×10–12</small></li>
+          <li>Тяга гантели одной рукой <small>3×10</small></li>
+          <li>Сгибания на бицепс <small>3×10–12</small></li></ol></div>
+        <div class="day"><header>Ср <span>Ноги · пресс</span></header><ol>
+          <li>Приседания со штангой <small>4×6–8</small></li>
+          <li>Румынская тяга <small>3×8–10</small></li>
+          <li>Жим ногами <small>3×10–12</small></li>
+          <li>Подъём на носки <small>4×15</small></li>
+          <li>Скручивания, планка <small>3×15 / 3×60 сек</small></li></ol></div>
+        <div class="day rest"><header>Чт <span>Восстановление</span></header><p>Лёгкое кардио 30–40 минут (быстрая ходьба, велосипед), растяжка 15 минут, 8–10 тыс. шагов.</p></div>
+        <div class="day"><header>Пт <span>Всё тело · сила</span></header><ol>
+          <li>Становая тяга <small>4×5</small></li>
+          <li>Жим гантелей сидя <small>3×8</small></li>
+          <li>Отжимания на брусьях <small>3×8–12</small></li>
+          <li>Выпады с гантелями <small>3×10 на ногу</small></li>
+          <li>Кардио-финиш: 10 мин интервалы</li></ol></div>
+        <div class="day rest"><header>Сб–Вс <span>Активный отдых</span></header><p>Один день — игровой спорт, плавание или пробежка 30–40 минут. Второй — полный отдых и сон.</p></div>
+      </div>
+    </div>
+
+    <!-- ЖЕНЩИНЫ -->
+    <div class="pane" id="pane-f">
+      <h3 class="sub" style="margin-top:0">Рацион на день · женщина</h3>
+      <div class="macros">
+        <div class="macro k"><b>≈1930</b><span>ккал</span></div>
+        <div class="macro"><b>135 г</b><span>белки</span></div>
+        <div class="macro"><b>58 г</b><span>жиры</span></div>
+        <div class="macro"><b>217 г</b><span>углеводы</span></div>
+      </div>
+      <div class="table-scroll"><table>
+        <tr><th>Приём</th><th>Состав</th><th class="num">Ккал</th><th class="num">Б / Ж / У</th></tr>
+        <tr><td><b>Завтрак</b><br><small>7:30</small></td><td>Овсянка 50 г на молоке 1,5% 200 мл, ягоды 100 г, грецкие орехи 15 г</td><td class="num">420</td><td class="num">15 / 16 / 55</td></tr>
+        <tr><td><b>Перекус 1</b><br><small>10:30</small></td><td>Греческий йогурт 2% 150 г, яблоко, миндаль 15 г</td><td class="num">292</td><td class="num">18 / 11 / 33</td></tr>
+        <tr><td><b>Обед</b><br><small>13:30</small></td><td>Куриное филе 130 г, рис или киноа варёные 150 г, салат 200 г с 7 г масла</td><td class="num">455</td><td class="num">36 / 11 / 48</td></tr>
+        <tr><td><b>Перекус 2</b><br><small>16:30–17:00</small></td><td>Творог 5% 150 г, груша</td><td class="num">282</td><td class="num">26 / 8 / 29</td></tr>
+        <tr><td><b>Ужин</b><br><small>19:30</small></td><td>Треска или другая белая рыба 180 г, картофель варёный 200 г, овощи 200 г с 10 г масла</td><td class="num">480</td><td class="num">40 / 12 / 52</td></tr>
+        <tr class="total"><td colspan="2">Итого за день</td><td class="num">≈1930</td><td class="num">135 / 58 / 217</td></tr>
+      </table></div>
+
+      <h3 class="sub">Программа тренировок · 4 дня + активность</h3>
+      <div class="days">
+        <div class="day"><header>Пн <span>Ноги · ягодицы</span></header><ol>
+          <li>Приседания (штанга или гоблет) <small>4×8–10</small></li>
+          <li>Ягодичный мостик со штангой <small>4×10–12</small></li>
+          <li>Румынская тяга <small>3×10</small></li>
+          <li>Выпады назад <small>3×10 на ногу</small></li>
+          <li>Отведение ноги в тренажёре <small>3×15</small></li></ol></div>
+        <div class="day"><header>Вт <span>Верх тела</span></header><ol>
+          <li>Тяга верхнего блока <small>4×10</small></li>
+          <li>Жим гантелей лёжа <small>3×10</small></li>
+          <li>Тяга нижнего блока <small>3×12</small></li>
+          <li>Жим гантелей сидя <small>3×10</small></li>
+          <li>Бицепс + трицепс суперсет <small>3×12</small></li></ol></div>
+        <div class="day rest"><header>Ср <span>Кардио · мобильность</span></header><p>Быстрая ходьба или плавание 40 минут, растяжка и йога 20 минут. Шаги: 8–10 тыс.</p></div>
+        <div class="day"><header>Чт <span>Ноги · пресс</span></header><ol>
+          <li>Становая тяга на прямых ногах <small>4×8</small></li>
+          <li>Жим ногами <small>3×12</small></li>
+          <li>Болгарские сплит-приседания <small>3×10</small></li>
+          <li>Подъём на носки <small>3×15</small></li>
+          <li>Планка, скручивания <small>3×45 сек / 3×15</small></li></ol></div>
+        <div class="day"><header>Пт <span>Всё тело + интервалы</span></header><ol>
+          <li>Круговая: приседания, отжимания, тяга гантели, выпады <small>4 круга × 12</small></li>
+          <li>Интервальное кардио <small>15 минут (30 сек работа / 30 сек отдых)</small></li></ol></div>
+        <div class="day rest"><header>Сб–Вс <span>Активный отдых</span></header><p>Прогулка, танцы, велосипед или плавание. Один день — полный отдых и сон.</p></div>
+      </div>
+    </div>
+
+    <div class="warn" style="margin-top:28px"><b>Правила для обоих профилей:</b> разминка 7–10 минут перед каждой тренировкой; прогрессия нагрузок — добавляйте вес или повторения каждые 1–2 недели; вода 30–35 мл на кг веса; сон 7–9 часов; новичкам — 2–3 тренировки в неделю и занятия с тренером для постановки техники.</div>
+
+    <h3 class="sub">Программы под вашу цель</h3>
+    <p class="sec-lead" style="margin-bottom:18px">Рацион и тренировки выше — базовый вариант для поддержания формы. Выберите цель, чтобы увидеть, как менять калорийность, КБЖУ и нагрузку. Калории даны для мужчины ≈80 кг и женщины ≈62 кг.</p>
+    <div class="chips" id="goalChips">
+      <button class="chip on" data-g="lose" type="button">🔥 Похудение</button>
+      <button class="chip" data-g="gain" type="button">💪 Набор мышц</button>
+      <button class="chip" data-g="tone" type="button">⚡ Тонус и рельеф</button>
+      <button class="chip" data-g="yoga" type="button">🧘 Йога и гибкость</button>
+      <button class="chip" data-g="run" type="button">🏃 Выносливость и бег</button>
+    </div>
+
+    <!-- Похудение -->
+    <div class="gpane on" id="g-lose">
+      <div class="mini">
+        <div class="card"><small>Мужчина</small><span class="big">≈2100 ккал</span><small>Б 175 · Ж 65 · У 205 г</small></div>
+        <div class="card"><small>Женщина</small><span class="big">≈1600 ккал</span><small>Б 120 · Ж 50 · У 168 г</small></div>
+        <div class="card"><small>Темп снижения</small><span class="big">0,5–1% веса</span><small>в неделю, это 0,4–0,8 кг</small></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>Питание</h3><ul>
+          <li>Дефицит 15–20% от калорий поддержания. Не опускайтесь ниже 1500 ккал (женщины) и 1800 ккал (мужчины) без врача.</li>
+          <li>Белок 1,8–2,2 г на кг веса: он сохраняет мышцы и сытость.</li>
+          <li>Клетчатка 25–35 г: овощи в каждый приём пищи, бобовые, цельные злаки.</li>
+          <li>Из базового рациона уберите: масло в салатах (−90 ккал), орехи, хлеб, сократите гарнир на треть.</li>
+          <li>Сладкие напитки и алкоголь — минимум. Вес измеряйте 1 раз в неделю и сравнивайте средние значения.</li>
+          <li>Раз в 8–12 недель — 1–2 недели на калориях поддержания (диет-брейк).</li></ul></div>
+        <div class="card"><h3>Тренировки</h3><ul>
+          <li>Силовые 3–4 раза в неделю: сохраняют мышцы и форму. Используйте программу из основного блока.</li>
+          <li>10 000 шагов в день — самый лёгкий способ увеличить расход калорий.</li>
+          <li>Кардио в зоне 2 (можно говорить фразами): 2×30–40 минут в неделю.</li>
+          <li>Интервальная тренировка 1 раз в неделю: 8×30 сек усилие / 90 сек отдых.</li>
+          <li>Сон 7–9 часов: при недосыпе жир уходит хуже, а аппетит растёт.</li></ul></div>
+      </div>
+    </div>
+
+    <!-- Набор массы -->
+    <div class="gpane" id="g-gain">
+      <div class="mini">
+        <div class="card"><small>Мужчина</small><span class="big">≈2900 ккал</span><small>Б 175 · Ж 85 · У 360 г</small></div>
+        <div class="card"><small>Женщина</small><span class="big">≈2250 ккал</span><small>Б 125 · Ж 70 · У 280 г</small></div>
+        <div class="card"><small>Темп набора</small><span class="big">0,25–0,5% веса</span><small>в неделю, это 0,2–0,4 кг</small></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>Питание</h3><ul>
+          <li>Профицит 10–15% (+250–400 ккал к поддержанию). Больший профицит даёт лишний жир, а не мышцы.</li>
+          <li>Белок 1,8–2,2 г/кг, жиры 0,9–1,1 г/кг, углеводы 4–6 г/кг — они дают энергию для тренировок.</li>
+          <li>Как добавить калории: +100 г риса или гречки, +1 банан, +20 г орехов, +1 ст. л. оливкового масла, молочный коктейль.</li>
+          <li>Ешьте 4–5 раз в день, белок 25–40 г в каждый приём.</li>
+          <li>Добавки: креатин 3–5 г в день, протеин при нехватке белка в рационе.</li></ul></div>
+        <div class="card"><h3>Тренировки</h3><ul>
+          <li>4–5 силовых в неделю, упор на базовые: приседания, жим, тяги, становая.</li>
+          <li>6–12 повторений, 3–4 подхода, отдых 2–3 минуты между тяжёлыми.</li>
+          <li>Принцип прогрессии: добавляйте вес или повторение каждые 1–2 недели. Ведите дневник тренировок.</li>
+          <li>Каждую группу мышц — 2 раза в неделю (верх/низ или грудь/спина/ноги + повтор).</li>
+          <li>Кардио минимум: 2×20 минут и 8 тыс. шагов. Сон 8 часов — здесь мышцы растут.</li></ul></div>
+      </div>
+    </div>
+
+    <!-- Тонус -->
+    <div class="gpane" id="g-tone">
+      <div class="mini">
+        <div class="card"><small>Мужчина</small><span class="big">≈2550 ккал</span><small>Б 175 · Ж 76 · У 290 г</small></div>
+        <div class="card"><small>Женщина</small><span class="big">≈1930 ккал</span><small>Б 135 · Ж 58 · У 217 г</small></div>
+        <div class="card"><small>Принцип</small><span class="big">Рекомпозиция</span><small>меньше жира и больше мышц одновременно</small></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>Питание</h3><ul>
+          <li>Калории на уровне поддержания: рацион из основного блока подходит без изменений.</li>
+          <li>Белок около 2 г/кг, в каждом приёме 25–40 г.</li>
+          <li>Большую часть углеводов размещайте вокруг тренировки.</li>
+          <li>Принцип 80/20: 80% цельной еды, 20% — удовольствие без чувства вины.</li></ul></div>
+        <div class="card"><h3>Тренировки</h3><ul>
+          <li>3–4 силовых тренировки в неделю по базовой программе.</li>
+          <li>Прогрессия нагрузки каждые 1–2 недели.</li>
+          <li>1–2 кардио по 30 минут и ежедневные 8–10 тыс. шагов.</li>
+          <li>Результат заметен через 8–12 недель: обхваты и фото сравнивайте раз в 2 недели, а не по весу.</li></ul></div>
+      </div>
+    </div>
+
+    <!-- Йога -->
+    <div class="gpane" id="g-yoga">
+      <div class="mini">
+        <div class="card"><small>Частота</small><span class="big">3–4 раза в неделю</span><small>по 30–60 минут</small></div>
+        <div class="card"><small>Расход за час</small><span class="big">≈180–350 ккал</span><small>хатха — меньше, виньяса — больше</small></div>
+        <div class="card"><small>Питание</small><span class="big">Поддержание</span><small>основной рацион без изменений</small></div>
+      </div>
+      <h3 class="sub" style="margin-top:8px">Комплекс на 20 минут</h3>
+      <div class="table-scroll"><table>
+        <tr><th>Поза</th><th>Время</th><th>Эффект</th></tr>
+        <tr><td><b>Кошка-корова</b></td><td>1 мин</td><td>Разогрев позвоночника</td></tr>
+        <tr><td><b>Приветствие солнцу</b></td><td>5 кругов</td><td>Разогрев всего тела, дыхание</td></tr>
+        <tr><td><b>Собака мордой вниз</b></td><td>1 мин</td><td>Спина, задняя поверхность ног, плечи</td></tr>
+        <tr><td><b>Воин II</b></td><td>45 сек на сторону</td><td>Ноги, устойчивость, сосредоточенность</td></tr>
+        <tr><td><b>Треугольник</b></td><td>30 сек на сторону</td><td>Растяжка боков и бёдер</td></tr>
+        <tr><td><b>Голубь</b></td><td>1 мин на сторону</td><td>Раскрытие тазобедренных суставов</td></tr>
+        <tr><td><b>Мост</b></td><td>1 мин</td><td>Ягодицы, поясница, грудь</td></tr>
+        <tr><td><b>Скрутка лёжа</b></td><td>45 сек на сторону</td><td>Мягкая работа с позвоночником</td></tr>
+        <tr><td><b>Шавасана</b></td><td>3–5 мин</td><td>Полное расслабление, снижение стресса</td></tr>
+      </table></div>
+      <div class="grid g2" style="margin-top:18px">
+        <div class="card"><h3>Недельный план</h3><ul>
+          <li><b>Пн:</b> хатха 45 минут (база, баланс).</li>
+          <li><b>Ср:</b> виньяса 40 минут (динамика, сила).</li>
+          <li><b>Пт:</b> растяжка и мобильность 30 минут.</li>
+          <li><b>Вс:</b> йога-нидра или медитация 20 минут (восстановление).</li></ul></div>
+        <div class="card"><h3>Важно знать</h3><ul>
+          <li>Практикуйте натощак или спустя 2–3 часа после еды.</li>
+          <li>Не форсируйте растяжку: лёгкое напряжение допустимо, боль — нет.</li>
+          <li>Йога отлично сочетается с силовыми тренировками: она улучшает гибкость, осанку и сон.</li>
+          <li>При травмах спины, гипертонии или беременности сначала проконсультируйтесь с врачом и инструктором.</li></ul></div>
+      </div>
+    </div>
+
+    <!-- Бег -->
+    <div class="gpane" id="g-run">
+      <div class="mini">
+        <div class="card"><small>Мужчина</small><span class="big">≈2750 ккал</span><small>Б 150 · Ж 75 · У 360 г</small></div>
+        <div class="card"><small>Женщина</small><span class="big">≈2100 ккал</span><small>Б 110 · Ж 58 · У 285 г</small></div>
+        <div class="card"><small>Углеводы</small><span class="big">5–7 г/кг</span><small>главное топливо для бега</small></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>Программа бега на 4 недели</h3><ul>
+          <li><b>Вторник:</b> лёгкий бег 30–40 минут в разговорном темпе.</li>
+          <li><b>Четверг:</b> интервалы 6×400 м в быстром темпе, отдых — 90 секунд ходьбы.</li>
+          <li><b>Суббота:</b> длинная пробежка: 5 км в первую неделю, +1 км в каждую следующую.</li>
+          <li><b>Понедельник и пятница:</b> силовые 30–40 минут (ноги, кор, ягодицы).</li>
+          <li>Правило 10%: не увеличивайте недельный километраж более чем на 10%.</li></ul></div>
+        <div class="card"><h3>Питание и восстановление</h3><ul>
+          <li>За 2–3 часа до бега — углеводы и немного белка (овсянка, банан).</li>
+          <li>После — белок и углеводы в течение часа (рис с курицей, творог с фруктами).</li>
+          <li>Вода: 500 мл за 2 часа до бега, при пробежках дольше 60 минут — электролиты.</li>
+          <li>Беговая обувь — по ноге, замена каждые 600–800 км. Растяжка и сон 8 часов.</li></ul></div>
+      </div>
+    </div>
+
+    <h3 class="sub">Калькулятор калорий</h3>
+    <div class="card">
+      <div class="calc">
+        <div><label>Пол</label><select id="cSex"><option value="m">Мужчина</option><option value="f">Женщина</option></select></div>
+        <div><label>Возраст</label><input id="cAge" type="number" inputmode="numeric" value="25" min="14" max="80"></div>
+        <div><label>Рост, см</label><input id="cH" type="number" inputmode="numeric" value="178" min="120" max="220"></div>
+        <div><label>Вес, кг</label><input id="cW" type="number" inputmode="decimal" value="78" min="35" max="200"></div>
+        <div><label>Активность</label><select id="cA"><option value="1.375">Лёгкая (1–3 трен.)</option><option value="1.55" selected>Умеренная (3–5 трен.)</option><option value="1.725">Высокая (6–7 трен.)</option></select></div>
+        <div><label>Цель</label><select id="cG"><option value="lose">Похудение</option><option value="gain">Набор мышц</option><option value="tone" selected>Тонус / поддержание</option><option value="yoga">Йога</option><option value="run">Выносливость</option></select></div>
+        <div><button type="button" onclick="calc()">Рассчитать</button></div>
+      </div>
+      <div id="calcOut"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЗДОРОВЬЕ ============ -->
+<section id="health">
+  <div class="wrap">
+    <div class="eyebrow">Блок 3</div>
+    <h2 class="sec-title">Здоровье: анализы, витамины и добавки</h2>
+    <p class="sec-lead">Профилактика дешевле лечения. Раз в год делайте базовый чек-ап, а добавки принимайте осознанно — по результатам анализов и после консультации врача.</p>
+
+    <h3 class="sub" style="margin-top:0">Анализы: раз в год</h3>
+    <div class="grid g3">
+      <div class="card">
+        <div class="ico">🩸</div>
+        <h3>Базовый чек-ап <span class="pill">всем</span></h3>
+        <ul>
+          <li>Общий анализ крови с лейкоформулой</li>
+          <li>Глюкоза и гликированный гемоглобин (HbA1c)</li>
+          <li>Липидограмма: холестерин, ЛПНП, ЛПВП, триглицериды</li>
+          <li>АЛТ, АСТ, билирубин, креатинин, мочевая кислота</li>
+          <li>Общий анализ мочи</li>
+          <li>Измерение давления, ЭКГ</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="ico">🧪</div>
+        <h3>Витамины и минералы <span class="pill">всем</span></h3>
+        <ul>
+          <li>Витамин D (25-OH)</li>
+          <li>Витамин B12 и фолат</li>
+          <li>Ферритин, железо, ОЖСС</li>
+          <li>ТТГ и св. Т4 (щитовидная железа)</li>
+          <li>Магний, кальций, цинк — при симптомах или интенсивных тренировках</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="ico">⚕️</div>
+        <h3>По полу <span class="pill w">по показаниям</span></h3>
+        <ul>
+          <li><b>Мужчины:</b> общий и свободный тестостерон, ЛГ, пролактин, осмотр у уролога; ПСА — не массово: решение принимают вместе с урологом (обычно после 50 лет или при наследственном риске).</li>
+          <li><b>Женщины:</b> гинеколог и мазок на цитологию раз в год, УЗИ органов малого таза, гормоны (ФСГ, ЛГ, эстрадиол, пролактин) по дням цикла, маммолог/УЗИ молочных желёз.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">Скрининг по рекомендациям ВОЗ</h3>
+    <p class="sec-lead" style="margin-bottom:18px">Скрининг — это обследование здоровых людей, чтобы найти болезнь до появления симптомов. ВОЗ даёт рекомендации, а обязательным их делают национальные программы: в вашей стране сроки и перечень могут отличаться, поэтому сверяйтесь с местными протоколами и врачом.</p>
+
+    <div class="mini">
+      <div class="card"><small>Артериальное давление</small><span class="big">&lt;140/90</span><small>ВОЗ: гипертония — от 140/90 мм рт. ст. и выше</small></div>
+      <div class="card"><small>Глюкоза натощак</small><span class="big">&lt;6,1 ммоль/л</span><small>от 7,0 — диабет; HbA1c от 6,5%</small></div>
+      <div class="card"><small>Индекс массы тела</small><span class="big">18,5–24,9</span><small>25 и выше — избыточный вес, 30 и выше — ожирение</small></div>
+      <div class="card"><small>Окружность талии</small><span class="big">&lt;94 / &lt;80 см</span><small>мужчины / женщины: выше — повышенный риск</small></div>
+    </div>
+
+    <div class="chips" id="scrChips">
+      <button class="chip on" data-s="all" type="button">Все</button>
+      <button class="chip" data-s="m" type="button">Мужчины</button>
+      <button class="chip" data-s="f" type="button">Женщины</button>
+    </div>
+    <div class="table-scroll"><table id="scrTable">
+      <tr><th>Обследование</th><th>Кому и с какого возраста</th><th>Как часто</th></tr>
+      <tr data-for="all"><td><b>Измерение давления</b></td><td>Все с 18 лет</td><td>Минимум раз в год; при повышенных цифрах — домашний контроль</td></tr>
+      <tr data-for="all"><td><b>Вес, ИМТ, окружность талии</b></td><td>Все с 18 лет</td><td>Раз в год (ориентир риска сердечно-сосудистых болезней и диабета)</td></tr>
+      <tr data-for="all"><td><b>Глюкоза крови / HbA1c</b></td><td>Взрослые с избыточным весом, наследственностью по диабету, малоподвижные; всем — с 35 лет</td><td>Раз в 1–3 года, при факторах риска — ежегодно</td></tr>
+      <tr data-for="all"><td><b>Холестерин (липидограмма) и оценка сердечно-сосудистого риска</b></td><td>Все с 20 лет, при курении, ожирении, повышенном давлении — раньше и чаще</td><td>Раз в 3–5 лет, при риске — ежегодно</td></tr>
+      <tr data-for="all"><td><b>Курение и алкоголь</b></td><td>Все взрослые: короткий опрос (например, AUDIT) и совет врача</td><td>Раз в год у терапевта</td></tr>
+      <tr data-for="all"><td><b>Психическое здоровье</b></td><td>Все взрослые: опросники депрессии и тревоги (PHQ-9, GAD-7)</td><td>Раз в год и при стойком упадке сил, плохом сне, раздражительности</td></tr>
+      <tr data-for="all"><td><b>ВИЧ, гепатиты B и C</b></td><td>Хотя бы один раз в жизни всем взрослым; при риске — регулярно</td><td>ВИЧ и инфекции, передаваемые половым путём — при каждой смене партнёра или раз в год</td></tr>
+      <tr data-for="all"><td><b>Туберкулёз (рентген/флюорография)</b></td><td>Группы риска и контакты; в ряде стран — всем взрослым по нацпрограмме</td><td>По назначению или раз в 1–2 года по местным правилам</td></tr>
+      <tr data-for="all"><td><b>Зрение, стоматолог</b></td><td>Все взрослые</td><td>Стоматолог 1–2 раза в год, окулист раз в 1–2 года</td></tr>
+      <tr data-for="f"><td><b>Рак шейки матки: ВПЧ-тест</b></td><td>Женщины с 30 лет (ВОЗ рекомендует ВПЧ-ДНК тест как основной метод)</td><td>Раз в 5–10 лет при отрицательном результате; цитология (ПАП) — раз в 3 года</td></tr>
+      <tr data-for="f"><td><b>Молочные железы</b></td><td>Самообследование с 20 лет, осмотр у маммолога с 30–40 лет; маммография по ВОЗ — 50–69 лет</td><td>Самообследование ежемесячно, маммография раз в 2 года</td></tr>
+      <tr data-for="f"><td><b>Гинеколог, УЗИ малого таза</b></td><td>Все женщины, ведущие половую жизнь</td><td>Раз в год</td></tr>
+      <tr data-for="m"><td><b>Яички</b></td><td>Самообследование с 15–18 лет, осмотр у уролога</td><td>Самообследование раз в месяц, осмотр — раз в год</td></tr>
+      <tr data-for="m"><td><b>Простата (ПСА)</b></td><td>ВОЗ не рекомендует массовое тестирование: решение принимают вместе с урологом, обычно после 50 лет или при наследственном риске</td><td>По решению врача</td></tr>
+      <tr data-for="all"><td><b>Рак толстой кишки</b></td><td>Все — с 50 лет (раньше при наследственности и тревожных симптомах)</td><td>Анализ кала на скрытую кровь раз в 1–2 года или колоноскопия по назначению</td></tr>
+    </table></div>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card"><h3>Прививки (рекомендации ВОЗ)</h3><ul>
+        <li>Столбняк и дифтерия: ревакцинация раз в 10 лет.</li>
+        <li>Грипп: ежегодно осенью.</li>
+        <li>Корь, краснуха, паротит: две дозы в жизни, если не были привиты.</li>
+        <li>Гепатит B и ВПЧ: по схеме, если не были привиты (ВПЧ лучше всего до начала половой жизни).</li>
+        <li>COVID-19 и другие — по национальному календарю.</li></ul></div>
+      <div class="card"><h3>Образ жизни по ВОЗ</h3><ul>
+        <li>Физическая активность: 150–300 минут умеренной (или 75–150 интенсивной) нагрузки в неделю плюс силовые 2 раза в неделю.</li>
+        <li>Овощи и фрукты: не менее 400 г в день.</li>
+        <li>Соль: менее 5 г в день (около одной чайной ложки).</li>
+        <li>Сахар: свободные сахара менее 10% от калорий (лучше менее 5%).</li>
+        <li>Курение — отказ полностью, алкоголь — чем меньше, тем лучше: безопасной дозы не существует.</li></ul></div>
+    </div>
+    <div class="warn"><b>Когда идти к врачу сразу, не дожидаясь скрининга:</b> боль в груди, одышка, внезапная слабость или онемение, потеря веса без причины, длительная температура, кровь в кале или моче, новое уплотнение в молочной железе или яичке, затяжная подавленность. Скрининг предназначен для людей без симптомов.</div>
+
+    <h3 class="sub">Витамины и добавки</h3>
+    <div class="table-scroll"><table>
+      <tr><th>Добавка</th><th>Ориентир по дозе</th><th>Зачем</th><th>Важно</th></tr>
+      <tr><td><b>Витамин D3</b></td><td>1000–2000 МЕ/день</td><td>Иммунитет, кости, гормональный фон</td><td><span class="pill w">по анализу</span> Дозу подбирает врач по уровню 25-OH</td></tr>
+      <tr><td><b>Омега-3 (EPA+DHA)</b></td><td>1–2 г/день</td><td>Сердце, сосуды, мозг, восстановление</td><td>Принимать с едой; если мало жирной рыбы в рационе</td></tr>
+      <tr><td><b>Магний (глицинат / цитрат)</b></td><td>200–400 мг вечером</td><td>Сон, нервная система, мышцы</td><td>Осторожно при болезнях почек</td></tr>
+      <tr><td><b>Креатин моногидрат</b></td><td>3–5 г/день</td><td>Сила, мышечная масса, когнитивные функции</td><td>Пить больше воды; самая изученная спортивная добавка</td></tr>
+      <tr><td><b>Протеин (сывороточный)</b></td><td>20–30 г порция</td><td>Добор белка, если не хватает в еде</td><td>Добавка к рациону, а не замена еды</td></tr>
+      <tr><td><b>Железо</b></td><td>только по назначению</td><td>Профилактика анемии (чаще у женщин)</td><td><span class="pill r">только после анализа</span> Избыток вреден</td></tr>
+      <tr><td><b>Витамин B12</b></td><td>по анализу</td><td>Энергия, кроветворение</td><td>Особенно актуален при вегетарианстве и веганстве</td></tr>
+      <tr><td><b>Фолиевая кислота</b></td><td>400 мкг/день</td><td>Планирование беременности</td><td>Начинать за 2–3 месяца до зачатия по рекомендации врача</td></tr>
+      <tr><td><b>Цинк</b></td><td>8–15 мг/день</td><td>Иммунитет, кожа, гормональный фон</td><td>Курсами; при дефиците или потоотделении на тренировках</td></tr>
+    </table></div>
+
+    <h3 class="sub">Базовые привычки здоровья</h3>
+    <div class="grid g3">
+      <div class="card"><div class="ico">😴</div><h3>Сон 7–9 часов</h3><p>Ложитесь и вставайте в одно время, за час до сна — без экранов, в комнате прохладно и темно.</p></div>
+      <div class="card"><div class="ico">💧</div><h3>Вода и клетчатка</h3><p>30–35 мл воды на кг веса, 400 г овощей и фруктов в день, минимум сахара и ультрапереработанной еды.</p></div>
+      <div class="card"><div class="ico">🧠</div><h3>Психическое здоровье</h3><p>Медитация или прогулка 10–15 минут, общение с близкими, цифровой детокс раз в неделю. Не стесняйтесь обращаться к психологу.</p></div>
+    </div>
+
+    <div class="warn"><b>Важно:</b> материалы сайта носят информационный характер и не заменяют консультацию врача. Перед приёмом добавок, изменением рациона и началом тренировок при хронических заболеваниях, беременности или приёме лекарств обязательно проконсультируйтесь со специалистом.</div>
+  </div>
+</section>
+
+<button id="toTop" type="button" aria-label="Наверх">↑</button>
+
+<footer>
+  <div class="wrap"><b>ДОСТИГАТОРЫ</b> · Карьера. Спорт. Здоровье.<br>Делайте на 1% лучше каждый день — и через год вы не узнаете себя.</div>
+</footer>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    document.getElementById('pane-'+b.dataset.t).classList.add('on');
+  });
+});
+function calc(){
+  var s=document.getElementById('cSex').value,
+      a=+document.getElementById('cAge').value,
+      h=+document.getElementById('cH').value,
+      w=+document.getElementById('cW').value,
+      k=+document.getElementById('cA').value,
+      out=document.getElementById('calcOut');
+  if(!(a>0&&h>0&&w>0)){out.textContent='Заполните все поля.';return}
+  var bmr=10*w+6.25*h-5*a+(s==='m'?5:-161),
+      tdee=Math.round(bmr*k),
+      G={lose:[.82,2.0,.8,'Похудение'],gain:[1.12,1.9,1.0,'Набор мышц'],tone:[1,2.0,.9,'Тонус / поддержание'],yoga:[1,1.5,.9,'Йога'],run:[1.08,1.6,1.0,'Выносливость']},
+      g=G[document.getElementById('cG').value],
+      kcal=Math.round(tdee*g[0]/10)*10,
+      floor=s==='m'?1800:1500;
+  if(g[0]<1&&kcal<floor)kcal=floor;
+  var p=Math.round(w*g[1]),f=Math.round(w*g[2]),c=Math.max(0,Math.round((kcal-p*4-f*9)/4));
+  out.innerHTML='Базовый обмен: <b>'+Math.round(bmr)+' ккал</b> · Поддержание веса: <b>'+tdee+' ккал</b><br>'
+   +'Цель «'+g[3]+'»: <b>'+kcal+' ккал в день</b><br>'
+   +'Белки <b>'+p+' г</b> · Жиры <b>'+f+' г</b> · Углеводы <b>'+c+' г</b>';
+}
+document.querySelectorAll('#goalChips .chip').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('#goalChips .chip').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.gpane').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    document.getElementById('g-'+b.dataset.g).classList.add('on');
+    document.getElementById('cG').value=b.dataset.g;calc();
+  });
+});
+document.querySelectorAll('#scrChips .chip').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('#scrChips .chip').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    var v=b.dataset.s;
+    document.querySelectorAll('#scrTable tr[data-for]').forEach(function(r){
+      r.style.display=(v==='all'||r.dataset.for==='all'||r.dataset.for===v)?'':'none';
+    });
+  });
+});
+var cc=document.querySelectorAll('#careerChecks input');
+function careerScore(){
+  var n=0;cc.forEach(function(x){if(x.checked)n++});
+  document.getElementById('careerBar').style.width=n*10+'%';
+  var t=n<=3?['Старт','Выберите одну привычку (план на день или блок обучения) и внедрите её на 30 дней.']
+       :n<=6?['Рост','Хорошая база. Добавьте обратную связь, ментора и недельный обзор.']
+       :n<=8?['Профи','Вы действуете как сильный специалист. Работайте над видимостью результатов и лидерством.']
+       :['Лидер','Отличный уровень. Делитесь опытом, наставляйте других и берите задачи уровнем выше.'];
+  document.getElementById('careerOut').innerHTML='Отмечено: <b>'+n+' из 10</b> · Уровень: <b>'+t[0]+'</b>. '+t[1];
+}
+cc.forEach(function(x){x.addEventListener('change',careerScore)});careerScore();
+calc();
+document.querySelectorAll('.calc input,.calc select').forEach(function(e){e.addEventListener('input',calc);e.addEventListener('change',calc)});
+var links=[].slice.call(document.querySelectorAll('nav a')),
+    secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}),
+    topBtn=document.getElementById('toTop');
+function spy(){
+  var y=window.scrollY+120,cur=-1;
+  secs.forEach(function(el,i){if(el.offsetTop<=y)cur=i});
+  links.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+  topBtn.classList.toggle('show',window.scrollY>500);
+}
+window.addEventListener('scroll',spy,{passive:true});spy();
+topBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+</script>
+</body>
+</html>
